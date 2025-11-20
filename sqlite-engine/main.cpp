@@ -2,6 +2,9 @@
 #include <string>
 #include "row.h"
 #include "table.h"
+#include "command-type.h"
+#include "commandParser.h"
+#include "stringUtils.h"
 using namespace std;
 
 int main()
@@ -16,6 +19,44 @@ int main()
 	t.addRow(row2);
 	
 	t.printRows();
+
+	string input = "drop table";
+	/*cout << endl << endl << "Command: ";
+	getline(cin, input); FOR USER INPUT*/
+
+	//first of all, make input uppercase
+	toUpper(input);
+
+	//check if we can get the command type
+	CommandType cmdTypeFromInput = CommandParser::getCommandType(input);
+	if (cmdTypeFromInput == CommandType::CREATE_TABLE)
+	{
+		cout << endl << "Creating table...";
+	}
+
+	else if (cmdTypeFromInput == CommandType::DROP_TABLE)
+	{
+		cout << endl << "Drop table command was called...";
+	}
+	else if (cmdTypeFromInput == CommandType::INSERT_CMD)
+	{
+		cout << endl << "Insert command was called...";
+	}
+	else if (cmdTypeFromInput == CommandType::SELECT_CMD)
+	{
+		cout << endl << "Select command was called...";
+	}
+	else if (cmdTypeFromInput == CommandType::DELETE_CMD)
+	{
+		cout << endl << "Delete command was called...";
+	}
+
+	else
+	{
+
+		cout << endl << "Unkown command";
+	}
+	
 
 	cout << endl;
 	return 0;

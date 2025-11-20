@@ -32,7 +32,6 @@ Row::Row()
 Row::Row(int id, string name, float price)
 {
 	setId(id);
-	
 	setName(name);
 	setPrice(price);
 }
