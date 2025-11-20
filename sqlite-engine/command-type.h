@@ -1,0 +1,15 @@
+#pragma once
+
+enum class CommandType
+{
+	CREATE_TABLE, 
+	CREATE_INDEX, 
+	DROP_TABLE, 
+	DROP_INDEX, 
+	DISPLAY_TABLE,
+	INSERT_CMD,
+	SELECT_CMD,
+	UPDATE_CMD,
+	DELETE_CMD,
+	UNKNOWN_CMD
+};
