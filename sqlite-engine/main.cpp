@@ -5,6 +5,7 @@
 #include "command-type.h"
 #include "commandParser.h"
 #include "stringUtils.h"
+#include "tokenizer.h"
 using namespace std;
 
 int main()
@@ -57,6 +58,16 @@ int main()
 		cout << endl << "Unkown command";
 	}
 	
+	//tokenizer test
+	cout << endl << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+	cout << endl << "Testing the tokenizer";
+	Tokenizer tok(100);
+	tok.tokenize(input);
+	tok.printTokens();
+	cout << endl << "Token at index 0: " << tok.getToken(0);
+	cout << endl << "Token at index 1: " << tok.getToken(1);
+	cout << endl << "Number of tokens(using getter): " << tok.getTokenCount();
+
 
 	cout << endl;
 	return 0;

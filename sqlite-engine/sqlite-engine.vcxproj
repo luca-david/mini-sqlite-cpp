@@ -128,6 +128,7 @@
     <ClCompile Include="row.cpp" />
     <ClCompile Include="stringUtils.cpp" />
     <ClCompile Include="table.cpp" />
+    <ClCompile Include="tokenizer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="command-type.h" />
@@ -135,6 +136,7 @@
     <ClInclude Include="row.h" />
     <ClInclude Include="stringUtils.h" />
     <ClInclude Include="table.h" />
+    <ClInclude Include="tokenizer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
