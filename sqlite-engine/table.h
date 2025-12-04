@@ -7,8 +7,8 @@ using namespace std;
 class Table
 {	
 	string tableName = "";
-	vector<string> columnNames;
-	vector<string> columnTypes;
+	string* columnNames = nullptr;
+	string* columnTypes = nullptr;
 	Row* rows = nullptr;
 	int rowCount = 0;
 
@@ -23,6 +23,6 @@ public:
 	
 	//accessors
 	string getName();
-	vector<string> getColumnNames();
-	vector<string> getColumnTypes();
+	string getColumnNames();
+	string getColumnTypes();
 };
