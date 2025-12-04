@@ -1,6 +1,6 @@
 #pragma once
 
-enum class CommandType
+enum class CommandType	
 {
 	CREATE_TABLE, 
 	CREATE_INDEX, 
