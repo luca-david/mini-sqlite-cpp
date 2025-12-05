@@ -27,23 +27,64 @@ void CommandParser::extractTableColumns(string input)
 	}
 }
 
-	// CREATE TABLE table_name [IF NOT EXISTS] ((column_1_name,type,size, default_value), (column_2_name,type,size, default_value), ...)
-	void CommandParser::createTable(std::string input) {
-		std::cout << "> " << input << std::endl;
+// CREATE TABLE table_name [IF NOT EXISTS] ((column_1_name,type,size, default_value), (column_2_name,type,size, default_value), ...)
+void CommandParser::createTable(std::string input) {
+	std::cout << "> " << input << std::endl;
 
-		const std::regex pattern("CREATE TABLE (\\w+){1} (IF NOT EXISTS )?\\((.*)\\)");
-		std::smatch match;
+	const std::regex pattern("CREATE TABLE (\\w+){1} (IF NOT EXISTS )?\\((.*)\\)");
+	std::smatch match;
 
-		if (std::regex_search(input, match, pattern)) {
-			std::cout << "Table: " << match[1] << std::endl;
-			std::cout << "Idempotent: " << (match[2].length() ? "no" : "yes") << std::endl;
-			std::cout << "Column definitions: " << std::endl;
-			extractTableColumns(match[3]);
-		}
-		else {
-			std::cout << "Invalid input" << std::endl;
-		}
-
-		std::cout << std::endl;
+	if (std::regex_search(input, match, pattern)) {
+		std::cout << "Table: " << match[1] << std::endl;
+		std::cout << "Idempotent: " << (match[2].length() ? "no" : "yes") << std::endl;
+		std::cout << "Column definitions: " << std::endl;
+		extractTableColumns(match[3]);
 	}
+	else {
+		std::cout << "Invalid input" << std::endl;
+	}
+
+	std::cout << std::endl;
+}
+
+// DROP TABLE table_name
+void CommandParser::dropTable(std::string input)
+{
+	std::cout << ">" << input << std::endl;
+
+	const std::regex pattern("DROP TABLE (\\w+){1}");
+	std::smatch match;
+
+	if (std::regex_search(input, match, pattern))
+	{
+		std::cout << "Table: " << match[1] << std::endl;
+	}
+	else
+	{
+		std::cout << "Invalid input: " << std::endl;
+	}
+
+	std::cout << std::endl;
+
+}
+
+// DISPLAY TABLE table_name
+void CommandParser::displayTable(std::string input)
+{
+	std::cout << ">" << input << std::endl;
+	
+	const std::regex pattern("DISPLAY TABLE (\\w+){1}");
+	std::smatch match;
+
+	if (std::regex_search(input, match, pattern)) {
+		std::cout << "Table: " << match[1] << std::endl;
+	}
+	else {
+		std::cout << "Invalid input" << std::endl;
+	}
+
+	std::cout << std::endl;
+
+}
+
 

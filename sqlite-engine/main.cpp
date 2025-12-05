@@ -75,6 +75,11 @@ int main()
 	parser.createTable(input);
 	cout << endl;
 
+	parser.displayTable("DISPLAY TABLE mytable1");
+
+	parser.dropTable("DROP TABLE mytable1");
+
+
 	cout << endl;
 	return 0;
 }
