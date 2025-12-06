@@ -123,23 +123,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="columns.cpp" />
+    <ClCompile Include="command.cpp" />
     <ClCompile Include="commandParser.cpp" />
+    <ClCompile Include="database.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="management-cmds.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="row.cpp" />
     <ClCompile Include="stringUtils.cpp" />
     <ClCompile Include="table.cpp" />
-    <ClCompile Include="tokenizer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="columns.h" />
     <ClInclude Include="command-type.h" />
+    <ClInclude Include="command.h" />
     <ClInclude Include="commandParser.h" />
+    <ClInclude Include="database.h" />
     <ClInclude Include="row.h" />
     <ClInclude Include="stringUtils.h" />
     <ClInclude Include="table.h" />
-    <ClInclude Include="tokenizer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

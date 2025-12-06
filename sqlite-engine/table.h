@@ -1,7 +1,7 @@
 #pragma once
 #include "row.h"
 #include <string>
-#include <vector>
+
 using namespace std;
 
 class Table
@@ -9,20 +9,17 @@ class Table
 	string tableName = "";
 	string* columnNames = nullptr;
 	string* columnTypes = nullptr;
+	int columnCount = 0;
 	Row* rows = nullptr;
 	int rowCount = 0;
+	int* list = nullptr;
 
 public:
-	void addRow(Row r);
-	void printRows();
+	/*void printRows();*/
 	Table();
 	~Table();
 	
-	//constructor for table with schema
-	Table(const string& name, const vector<string>& colNames, const vector<string>& colTypes);
-	
+
 	//accessors
 	string getName();
-	string getColumnNames();
-	string getColumnTypes();
 };

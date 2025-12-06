@@ -30,10 +30,13 @@
     <ClCompile Include="commandParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tokenizer.cpp">
+    <ClCompile Include="database.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="management-cmds.cpp">
+    <ClCompile Include="columns.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="command.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -53,7 +56,13 @@
     <ClInclude Include="commandParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="tokenizer.h">
+    <ClInclude Include="database.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="columns.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="command.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

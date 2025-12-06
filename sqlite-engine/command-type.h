@@ -10,6 +10,5 @@ enum class CommandType
 	INSERT_CMD,
 	SELECT_CMD,
 	UPDATE_CMD,
-	DELETE_CMD,
-	UNKNOWN_CMD
+	DELETE_CMD
 };

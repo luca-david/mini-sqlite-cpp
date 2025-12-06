@@ -5,81 +5,52 @@
 #include "command-type.h"
 #include "commandParser.h"
 #include "stringUtils.h"
-#include "tokenizer.h"
+#include "database.h"
+#include "command.h"
 #include <regex>
 
 using namespace std;
 
 int main()
 {
-	//Row row0(0, "prod1", 3.99f);
-	//Row row1(1, "prod2", 5.99f);
-	//Row row2(2, "prod3", 10.99f);
+    std::string inputs[] = {
+        "CREATE TABLE mytable1 IF NOT EXISTS ((column_1_name,integer,5, 2), (column_2_name,text,23, default_value), (column_3_name, float, 124, 2.0))",
+        "CREATE TABLE table_name ((column_1_name,integer,5, 2), (column_2_name,text,23, default_value), (column_3_name, float, 124, 2.0))",
+        "CREATE TABLE ((column_1_name,type,size, default_value), (column_2_name,type,size, default_value))",
 
-	//Table t;
-	//t.addRow(row0);
-	//t.addRow(row1);
-	//t.addRow(row2);
-	//
-	//t.printRows();
+        "DISPLAY TABLE mytable1",
+        "DROP TABLE mytable1",
 
-	//string input = "drop table";
-	///*cout << endl << endl << "Command: ";
-	//getline(cin, input); FOR USER INPUT*/
+        "CREATE INDEX index_name ON table_name (column_name)",
+        "CREATE INDEX IF NOT EXISTS index_name ON table_name (column_name)",
+        "DROP INDEX index_name",
 
-	////first of all, make input uppercase
-	//toUpper(input);
+        "INSERT INTO mytable1 VALUES(5 ,'blabla', 6.7)",
+        "INSERT INTO mytable2 VALUES('blabla')",
 
-	////check if we can get the command type
-	//CommandType cmdTypeFromInput = CommandParser::getCommandType(input);
-	//if (cmdTypeFromInput == CommandType::CREATE_TABLE)
-	//{
-	//	cout << endl << "Creating table...";
-	//}
+        "DELETE FROM table_name WHERE column_name = value",
 
-	//else if (cmdTypeFromInput == CommandType::DROP_TABLE)
-	//{
-	//	cout << endl << "Drop table command was called...";
-	//}
-	//else if (cmdTypeFromInput == CommandType::INSERT_CMD)
-	//{
-	//	cout << endl << "Insert command was called...";
-	//}
-	//else if (cmdTypeFromInput == CommandType::SELECT_CMD)
-	//{
-	//	cout << endl << "Select command was called...";
-	//}
-	//else if (cmdTypeFromInput == CommandType::DELETE_CMD)
-	//{
-	//	cout << endl << "Delete command was called...";
-	//}
+        "SELECT (column_1, column_2) FROM table_name",
+        "SELECT (column_1) FROM table_name WHERE column_name = value",
+        "SELECT ALL FROM table_name",
+        "SELECT ALL FROM table_name",
 
-	//else
-	//{
-
-	//	cout << endl << "Unkown command";
-	//}
-	//
-	////tokenizer test
-	//cout << endl << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
-	//cout << endl << "Testing the tokenizer";
-	//Tokenizer tok(100);
-	//tok.tokenize(input);
-	//tok.printTokens();
-	//cout << endl << "Token at index 0: " << tok.getToken(0);
-	//cout << endl << "Token at index 1: " << tok.getToken(1);
-	//cout << endl << "Number of tokens(using getter): " << tok.getTokenCount();
-
+        "UPDATE table_name SET column_name = value WHERE column_name = value",
+        "UPDATE table_name SET column_name = value WHERE some_other_column = some_value",
+    };
+	
 	CommandParser parser = CommandParser();
-	string input = "CREATE TABLE mytable1 IF NOT EXISTS ((column_1_name,integer,5, 2), (column_2_name,text,23, default_value), (column_3_name, float, 124, 2.0))";
-	parser.createTable(input);
-	cout << endl;
-
-	parser.displayTable("DISPLAY TABLE mytable1");
-
-	parser.dropTable("DROP TABLE mytable1");
-
-
+    for (string input : inputs) {
+        Command* cmd = parser.parseCommand(input);
+        if (cmd == nullptr) {
+            continue;
+        }
+        Database* db = Database::getInstance();
+        db->executeCommand(cmd);
+        cout << input << endl;
+        cout << cmd << endl << endl;
+    }
+	
 	cout << endl;
 	return 0;
 }
