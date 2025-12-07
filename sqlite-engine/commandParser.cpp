@@ -89,6 +89,7 @@ Command* CommandParser::createTable(std::string input) {
 	*cmd += match[1].str(); //adds title
 	*cmd += match[2].str(); //adds if not exists
 	runRegex(match[3], cmd, std::regex("[\\w.]+")); //adds definitions in groups of 4
+	this->noOfCommandsParsed++;
 
 	return cmd;
 }
@@ -105,6 +106,7 @@ Command* CommandParser::dropTable(std::string input)
 
 	Command* cmd = new Command(CommandType::DROP_TABLE);
 	*cmd += match[1].str();
+	this->noOfCommandsParsed++;
 
 	return cmd;
 }
@@ -121,6 +123,8 @@ Command* CommandParser::displayTable(std::string input) {
 
 	Command* cmd = new Command(CommandType::DISPLAY_TABLE);
 	*cmd += match[1];
+	this->noOfCommandsParsed++;
+
 	return cmd;
 }
 
@@ -137,6 +141,7 @@ Command* CommandParser::createIndex(string input) {
 	*cmd += match[2]; // index name
 	*cmd += match[3]; // table name
 	*cmd += match[4]; // column name
+	this->noOfCommandsParsed++;
 
 	return cmd;
 }
@@ -152,6 +157,7 @@ Command* CommandParser::dropIndex(std::string input) {
 
 	Command* cmd = new Command(CommandType::DROP_INDEX);
 	*cmd += match[1]; // index name
+	this->noOfCommandsParsed++;
 
 	return cmd;
 }
@@ -167,6 +173,7 @@ Command* CommandParser::insertRow(string input) {
 	Command* cmd = new Command(CommandType::INSERT_CMD);
 	*cmd += match[1]; // table name
 	this->runRegex(match[2], cmd, std::regex("[\\w.]+")); // Values
+	this->noOfCommandsParsed++;
 
 	return cmd;
 }
@@ -183,6 +190,7 @@ Command* CommandParser::deleteRow(string input) {
 	*cmd += match[1]; // Table Name
 	*cmd += match[2]; // Condition column
 	*cmd += match[3]; // Condition Value
+	this->noOfCommandsParsed++;
 
 	return cmd;
 }
@@ -222,6 +230,8 @@ Command* CommandParser::selectRows(string input) {
 	*cmd += where_match[1]; // Condition Key
 	*cmd += where_match[2]; // Condition Value
 
+	this->noOfCommandsParsed++;
+
 	return cmd;
 }
 
@@ -241,5 +251,45 @@ Command* CommandParser::updateRow(string input) {
 	*cmd += match[4]; // Condition column
 	*cmd += match[5]; // Condition Value
 
+	this->noOfCommandsParsed++;
+
 	return cmd;
+}
+
+CommandParser::~CommandParser() {
+
+}
+
+void CommandParser::operator=(CommandParser other) {
+	this->noOfCommandsParsed = other.noOfCommandsParsed;
+}
+
+std::ostream& operator<<(std::ostream& console, CommandParser parser) {
+	console << std::endl << "Number of commands parsed: " << parser.noOfCommandsParsed;
+	return console;
+}
+
+bool CommandParser::operator==(CommandParser& other) {
+	if (this == &other) {
+		return true;
+	}
+	return false;
+}
+
+CommandParser CommandParser::operator++(int) {
+	//post increment
+	CommandParser copy = *this;
+	this->noOfCommandsParsed += 1;
+	return copy;
+}
+
+bool CommandParser::operator>(CommandParser& other) {
+	if (this->noOfCommandsParsed > other.noOfCommandsParsed) {
+		return true;
+	}
+	return false;
+}
+
+CommandParser::CommandParser(CommandParser& other) {
+	this->noOfCommandsParsed = other.noOfCommandsParsed;
 }

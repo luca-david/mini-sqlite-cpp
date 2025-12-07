@@ -9,6 +9,8 @@ using namespace std;
 class CommandParser
 {
 private:
+	int noOfCommandsParsed = 0;
+
 	void runRegex(string input, Command* cmd, std::regex pattern);
 	Command* createTable(string input);
 	Command* dropTable(string input);
@@ -22,7 +24,16 @@ private:
 
 public:
 	CommandParser();
+	CommandParser(CommandParser& other);
+	~CommandParser();
+	void operator=(CommandParser other);
+	bool operator==(CommandParser& other);
+	CommandParser operator++(int); //for post increment
+	bool operator>(CommandParser& other);
+	friend std::ostream& operator<<(std::ostream& console, CommandParser parser);
 	Command* parseCommand(const string& input);
+
+
 	
 
 

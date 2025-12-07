@@ -39,7 +39,7 @@ int main()
         "UPDATE table_name SET column_name = value WHERE some_other_column = some_value",
     };
 	
-	CommandParser parser = CommandParser();
+	CommandParser parser;
     for (string input : inputs) {
         Command* cmd = parser.parseCommand(input);
         if (cmd == nullptr) {
@@ -51,8 +51,26 @@ int main()
         cout << cmd << endl << endl;
     }
 
-    Command cmd1(CommandType::CREATE_INDEX);
-    std::cout << &cmd1;
+    std::cout << parser;
+    parser++;
+    std::cout << parser;
+
+    if (parser == parser) {
+        std::cout << std::endl << "Same object";
+    }
+    else
+    {
+        std::cout << std::endl << "Different Object";
+    }
+
+    CommandParser copyOfParser(parser);
+    copyOfParser++;
+    if (copyOfParser > parser) {
+        std::cout << std::endl << "Copy is bigger than original";
+    }
+    else {
+        std::cout << std::endl << "Original is bigger than copy";
+    }
     
 	
 	cout << endl;
