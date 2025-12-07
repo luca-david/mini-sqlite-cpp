@@ -15,17 +15,19 @@ class Command {
 public:
 	//Command();
 	Command(CommandType type);
+	Command(Command& other);
+	~Command();
+
 	void operator+=(std::string str);
-	//void operator=(Command& other);
+	void operator=(Command& other);
+	bool operator==(Command& other);
+	friend std::ostream& operator<<(std::ostream& console, const Command* Command);
 	
 	std::string* getArguments();
 	std::string getArgument(int index);
 	int getNumberOfArguments();
 	int getCapacity();
 	CommandType getCommandType();
-	~Command();
-	Command(Command& other);
 
-	friend std::ostream& operator<<(std::ostream& console, const Command* Command);
 
 };

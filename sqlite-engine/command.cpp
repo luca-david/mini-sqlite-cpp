@@ -101,22 +101,26 @@ Command::Command(Command& other) {
 	this->capacity = other.capacity;
 }
 
-//void Command::operator=(Command& other) {
-//	//check if the object are the same
-//	if (this == &other) {
-//		return;
-//	}	
-//	this->type = other.type;
-//	this->numberOfArgs = other.numberOfArgs;
-//
-//	//delete[] this->args;
-//
-//	if (other.args == nullptr) {
-//		this->args = nullptr;
-//	}
-//
-//	//initialize this->args
-//}
+void Command::operator=(Command& other) {
+	//check if the object are the same
+	if (this == &other) {
+		return;
+	}	
+	this->type = other.type;
+	this->numberOfArgs = other.numberOfArgs;
+
+	delete[] this->args;
+
+	if (other.args == nullptr) {
+		this->args = nullptr;
+	}
+
+	//initialize this->args
+	this->args = new std::string[this->numberOfArgs];
+	for (int i = 0; i < this->numberOfArgs; i++) {
+		this->args[i] = other.args[i];
+	}
+}
 
 CommandType Command::getCommandType() {
 	return this->type;
@@ -124,6 +128,13 @@ CommandType Command::getCommandType() {
 
 std::string Command::getArgument(int index) {
 	return this->args[index];
+}
+
+bool Command::operator==(Command& other) {
+	if (this == &other) { //compare pointer of this object to mem adress of the other object
+		return true;
+	}
+	return false;
 }
 
 

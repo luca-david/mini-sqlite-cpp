@@ -50,6 +50,10 @@ int main()
         cout << input << endl;
         cout << cmd << endl << endl;
     }
+
+    Command cmd1(CommandType::CREATE_INDEX);
+    std::cout << &cmd1;
+    
 	
 	cout << endl;
 	return 0;
