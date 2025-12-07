@@ -14,6 +14,7 @@ Table** Database::getTable(string name) {
 			return &tables;
 		}
 	}
+	return nullptr;
 }
 
 void Database::addTable(Table* table) {
@@ -55,4 +56,63 @@ Database* Database::getInstance() {
 	return Database::instance;
 }
 
+int Database::getCount() {
+	return this->count;
+}
 
+Database::Database(Database& other) {
+	if (other.tables == nullptr) {
+		this->tables = nullptr;
+		this->count = 0;
+	}
+	else {
+		this->count = other.count;
+		delete[] this->tables;
+		this->tables = new Table[this->count];
+		for (int i = 0; i < this->count; i++) {
+			this->tables[i] = other.tables[i];
+		}
+	}
+}
+
+void Database::operator=(Database& other) {
+	if (other.tables == nullptr) {
+		this->tables = nullptr;
+		this->count = 0;
+	}
+	else {
+		this->count = other.count;
+		delete[] this->tables;
+		this->tables = new Table[this->count];
+		for (int i = 0; i < this->count; i++) {
+			this->tables[i] = other.tables[i];
+		}
+	}
+}
+
+Table* Database::getTables() {
+	if (this->tables == nullptr) {
+		return nullptr;
+	}
+	Table* copy = new Table[this->count];
+	for (int i = 0; i < this->count; i++) {
+		copy[i] = this->tables[i];
+	}
+	return copy;
+}
+
+std::ostream& operator<<(std::ostream& console, Database& db) {
+	console << std::endl << "Number of tables: " << db.count << std::endl;
+	return console;
+}
+
+void Database::operator+=(int additionalTables) {
+	this->tables += additionalTables;
+}
+
+bool Database::operator==(Database& other) {
+	if (this == &other) {
+		return true;
+	}
+	return false;
+}

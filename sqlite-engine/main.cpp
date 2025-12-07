@@ -47,30 +47,15 @@ int main()
         }
         Database* db = Database::getInstance();
         db->executeCommand(cmd);
+        std::cout << *db;
         cout << input << endl;
         cout << cmd << endl << endl;
     }
 
-    std::cout << parser;
-    parser++;
-    std::cout << parser;
-
-    if (parser == parser) {
-        std::cout << std::endl << "Same object";
-    }
-    else
-    {
-        std::cout << std::endl << "Different Object";
-    }
-
-    CommandParser copyOfParser(parser);
-    copyOfParser++;
-    if (copyOfParser > parser) {
-        std::cout << std::endl << "Copy is bigger than original";
-    }
-    else {
-        std::cout << std::endl << "Original is bigger than copy";
-    }
+    Database* db = Database::getInstance();
+    Database* db2 = Database::getInstance();
+    
+    *db = *db2;
     
 	
 	cout << endl;
